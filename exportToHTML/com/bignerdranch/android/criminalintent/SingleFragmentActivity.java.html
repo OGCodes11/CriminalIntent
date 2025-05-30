@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>SingleFragmentActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SingleFragmentActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bignerdranch</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">criminalintent</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentManager</span><span class="s2">;</span>
+
+<span class="s0">public abstract class </span><span class="s1">SingleFragmentActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+    <span class="s0">protected abstract </span><span class="s1">Fragment createFragment</span><span class="s2">();</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_fragment</span><span class="s2">);</span>
+        <span class="s1">FragmentManager fm </span><span class="s2">= </span><span class="s1">getSupportFragmentManager</span><span class="s2">();</span>
+        <span class="s1">Fragment fragment </span><span class="s2">= </span><span class="s1">fm</span><span class="s2">.</span><span class="s1">findFragmentById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">fragment_container</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">fragment </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">fragment </span><span class="s2">= </span><span class="s1">createFragment</span><span class="s2">();</span>
+            <span class="s1">fm</span><span class="s2">.</span><span class="s1">beginTransaction</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">fragment_container</span><span class="s2">, </span><span class="s1">fragment</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">commit</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

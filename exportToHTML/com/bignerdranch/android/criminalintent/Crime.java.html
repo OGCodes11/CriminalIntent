@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Crime.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Crime.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bignerdranch</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">criminalintent</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">UUID</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">GregorianCalendar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Calendar</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Crime </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">UUID mId</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String mTitle</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Calendar mDate</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Calendar mTime</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">mSolved</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">mChanged</span><span class="s2">;</span>
+    <span class="s0">public </span><span class="s1">Crime</span><span class="s2">() {</span>
+        <span class="s0">this</span><span class="s2">(</span><span class="s1">UUID</span><span class="s2">.</span><span class="s1">randomUUID</span><span class="s2">());</span>
+        <span class="s3">/*mId = UUID.randomUUID(); 
+        mDate = (GregorianCalendar) Calendar.getInstance(); 
+        mTime = (GregorianCalendar) Calendar.getInstance();*/</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Crime</span><span class="s2">(</span><span class="s1">UUID id</span><span class="s2">) {</span>
+        <span class="s1">mId </span><span class="s2">= </span><span class="s1">id</span><span class="s2">;</span>
+        <span class="s1">mDate </span><span class="s2">= (</span><span class="s1">GregorianCalendar</span><span class="s2">) </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s1">mTime </span><span class="s2">= (</span><span class="s1">GregorianCalendar</span><span class="s2">) </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">UUID getId</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">mId</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getDateString</span><span class="s2">(){</span>
+        <span class="s1">SimpleDateFormat dateFormat </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s4">&quot;MMM dd, yyyy&quot;</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">dateFormat</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s1">mDate</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">());</span>
+        <span class="s3">/*int year = mDate.get(Calendar.YEAR); 
+        int month = mDate.get(Calendar.MONTH) + 1; 
+        int day = mDate.get(Calendar.DATE); 
+        return month + &quot;/&quot; + day + &quot;/&quot; + year;*/</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getTimeString</span><span class="s2">() {</span>
+        <span class="s1">SimpleDateFormat timeFormat </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s4">&quot;hh:mm a&quot;</span><span class="s2">);</span>
+        <span class="s1">String formattedTime </span><span class="s2">= </span><span class="s1">timeFormat</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s1">mDate</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">());</span>
+        <span class="s0">return </span><span class="s1">formattedTime</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getTitle</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">mTitle</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">String title</span><span class="s2">) {</span>
+        <span class="s1">mTitle </span><span class="s2">= </span><span class="s1">title</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Calendar getDate</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">mDate</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDate</span><span class="s2">(</span><span class="s1">Calendar date</span><span class="s2">) {</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">DATE</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">DATE</span><span class="s2">));</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MONTH</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MONTH</span><span class="s2">));</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">YEAR</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">YEAR</span><span class="s2">));</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Calendar getTime</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">mTime</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTime</span><span class="s2">(</span><span class="s1">Calendar date</span><span class="s2">) {</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">HOUR_OF_DAY</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">HOUR_OF_DAY</span><span class="s2">));</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MINUTE</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MINUTE</span><span class="s2">));</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">SECOND</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">SECOND</span><span class="s2">));</span>
+        <span class="s1">mDate</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MILLISECOND</span><span class="s2">, </span><span class="s1">date</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MILLISECOND</span><span class="s2">));</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isSolved</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">mSolved</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSolved</span><span class="s2">(</span><span class="s0">boolean </span><span class="s1">solved</span><span class="s2">) {</span>
+        <span class="s1">mSolved </span><span class="s2">= </span><span class="s1">solved</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isChanged</span><span class="s2">() {</span><span class="s0">return </span><span class="s1">mChanged</span><span class="s2">;}</span>
+
+    <span class="s0">public void </span><span class="s1">setChanged</span><span class="s2">(</span><span class="s0">boolean </span><span class="s1">changed</span><span class="s2">) {</span><span class="s1">mChanged </span><span class="s2">= </span><span class="s1">changed</span><span class="s2">;}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

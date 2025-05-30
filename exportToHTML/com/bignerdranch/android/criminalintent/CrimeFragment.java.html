@@ -1,0 +1,227 @@
+<html>
+<head>
+<title>CrimeFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CrimeFragment.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bignerdranch</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">criminalintent</span><span class="s2">;</span>
+
+<span class="s0">import static </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">CompoundButton</span><span class="s2">.*;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Activity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">MenuProvider</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentResultListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">lifecycle</span><span class="s2">.</span><span class="s1">Lifecycle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">Editable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">TextWatcher</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">Menu</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">MenuInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">MenuItem</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">CheckBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">CompoundButton</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">EditText</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Calendar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">UUID</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">CrimeFragment </span><span class="s0">extends </span><span class="s1">Fragment </span><span class="s2">{</span>
+
+    <span class="s0">private static final </span><span class="s1">String ARG_CRIME_ID </span><span class="s2">= </span><span class="s3">&quot;crime_id&quot;</span><span class="s2">;</span>
+    <span class="s4">//public static final String REQUEST_KEY_DATE = &quot;request_key_date&quot;;</span>
+    <span class="s0">private static final </span><span class="s1">String REQUEST_DATE </span><span class="s2">= </span><span class="s3">&quot;DialogDate&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String REQUEST_TIME </span><span class="s2">= </span><span class="s3">&quot;DialogTime&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">Crime mCrime</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">EditText mTitleField</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Button mDateButton</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Button mTimeButton</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">CheckBox mSolvedCheckBox</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">CheckBox mCallPoliceCheckBox</span><span class="s2">;</span>
+
+    <span class="s0">public static </span><span class="s1">CrimeFragment newInstance</span><span class="s2">(</span><span class="s1">UUID crimeId</span><span class="s2">) {</span>
+        <span class="s1">Bundle args </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Bundle</span><span class="s2">();</span>
+        <span class="s1">args</span><span class="s2">.</span><span class="s1">putSerializable</span><span class="s2">(</span><span class="s1">ARG_CRIME_ID</span><span class="s2">, </span><span class="s1">crimeId</span><span class="s2">);</span>
+        <span class="s1">CrimeFragment fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CrimeFragment</span><span class="s2">();</span>
+        <span class="s1">fragment</span><span class="s2">.</span><span class="s1">setArguments</span><span class="s2">(</span><span class="s1">args</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">fragment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">UUID crimeId </span><span class="s2">= (</span><span class="s1">UUID</span><span class="s2">) </span><span class="s1">getArguments</span><span class="s2">().</span><span class="s1">getSerializable</span><span class="s2">(</span><span class="s1">ARG_CRIME_ID</span><span class="s2">);</span>
+        <span class="s1">mCrime </span><span class="s2">= </span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">requireActivity</span><span class="s2">()).</span><span class="s1">getCrime</span><span class="s2">(</span><span class="s1">crimeId</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onPause</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onPause</span><span class="s2">();</span>
+        <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">updateCrime</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">View onCreateView</span><span class="s2">(</span><span class="s1">LayoutInflater inflater</span><span class="s2">, </span><span class="s1">ViewGroup container</span><span class="s2">,</span>
+                             <span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s1">View v </span><span class="s2">= </span><span class="s1">inflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fragment_crime</span><span class="s2">, </span><span class="s1">container</span><span class="s2">, </span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">setupMenu</span><span class="s2">();</span>
+        <span class="s1">mTitleField </span><span class="s2">= (</span><span class="s1">EditText</span><span class="s2">) </span><span class="s1">v</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_title</span><span class="s2">);</span>
+        <span class="s1">mTitleField</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getTitle</span><span class="s2">());</span>
+        <span class="s1">mTitleField</span><span class="s2">.</span><span class="s1">addTextChangedListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">TextWatcher</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">beforeTextChanged</span><span class="s2">(</span>
+                    <span class="s1">CharSequence s</span><span class="s2">, </span><span class="s0">int </span><span class="s1">start</span><span class="s2">, </span><span class="s0">int </span><span class="s1">count</span><span class="s2">, </span><span class="s0">int </span><span class="s1">after</span><span class="s2">) {</span>
+
+            <span class="s2">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onTextChanged</span><span class="s2">(</span>
+                    <span class="s1">CharSequence s</span><span class="s2">, </span><span class="s0">int </span><span class="s1">start</span><span class="s2">, </span><span class="s0">int </span><span class="s1">before</span><span class="s2">, </span><span class="s0">int </span><span class="s1">count</span><span class="s2">) {</span>
+                <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">s</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+                <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">afterTextChanged</span><span class="s2">(</span><span class="s1">Editable s</span><span class="s2">) {</span>
+
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+
+        <span class="s1">mDateButton </span><span class="s2">= (</span><span class="s1">Button</span><span class="s2">) </span><span class="s1">v</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_date</span><span class="s2">);</span>
+        <span class="s1">updateDate</span><span class="s2">();</span>
+        <span class="s1">mDateButton</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">View</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">View v</span><span class="s2">) {</span>
+                <span class="s1">FragmentManager manager </span><span class="s2">= </span><span class="s1">getActivity</span><span class="s2">().</span><span class="s1">getSupportFragmentManager</span><span class="s2">();</span>
+                <span class="s1">DatePickerFragment dialog </span><span class="s2">= </span><span class="s1">DatePickerFragment</span><span class="s2">.</span><span class="s1">newInstance</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getDate</span><span class="s2">(), </span><span class="s1">REQUEST_DATE</span><span class="s2">);</span>
+                <span class="s1">dialog</span><span class="s2">.</span><span class="s1">show</span><span class="s2">(</span><span class="s1">manager</span><span class="s2">, </span><span class="s1">REQUEST_DATE</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">getParentFragmentManager</span><span class="s2">().</span><span class="s1">setFragmentResultListener</span><span class="s2">(</span><span class="s1">REQUEST_DATE</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s0">new </span><span class="s1">FragmentResultListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onFragmentResult</span><span class="s2">(</span><span class="s1">@NonNull String requestKey</span><span class="s2">, </span><span class="s1">@NonNull Bundle result</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">requestKey </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s0">return</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">REQUEST_DATE </span><span class="s2">== </span><span class="s1">requestKey</span><span class="s2">) {</span>
+                    <span class="s1">Calendar c </span><span class="s2">= </span><span class="s1">DatePickerFragment</span><span class="s2">.</span><span class="s1">getSelectedDate</span><span class="s2">(</span><span class="s1">result</span><span class="s2">);</span>
+                    <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setDate</span><span class="s2">(</span><span class="s1">c</span><span class="s2">);</span>
+                    <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                    <span class="s1">updateDate</span><span class="s2">();</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">mTimeButton </span><span class="s2">= </span><span class="s1">v</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_time</span><span class="s2">);</span>
+        <span class="s1">updateTime</span><span class="s2">();</span>
+        <span class="s1">mTimeButton</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">View</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">View v</span><span class="s2">) {</span>
+                <span class="s1">FragmentManager manager </span><span class="s2">= </span><span class="s1">getActivity</span><span class="s2">().</span><span class="s1">getSupportFragmentManager</span><span class="s2">();</span>
+                <span class="s1">TimePickerFragment dialog </span><span class="s2">= </span><span class="s1">TimePickerFragment</span><span class="s2">.</span><span class="s1">newInstance</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getDate</span><span class="s2">(), </span><span class="s1">REQUEST_TIME</span><span class="s2">);</span>
+                <span class="s1">dialog</span><span class="s2">.</span><span class="s1">show</span><span class="s2">(</span><span class="s1">manager</span><span class="s2">, </span><span class="s1">REQUEST_TIME</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">getParentFragmentManager</span><span class="s2">().</span><span class="s1">setFragmentResultListener</span><span class="s2">(</span><span class="s1">REQUEST_TIME</span><span class="s2">, </span><span class="s0">this</span><span class="s2">, </span><span class="s0">new </span><span class="s1">FragmentResultListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onFragmentResult</span><span class="s2">(</span><span class="s1">@NonNull String requestKey</span><span class="s2">, </span><span class="s1">@NonNull Bundle result</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">requestKey </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s0">return</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">REQUEST_TIME </span><span class="s2">== </span><span class="s1">requestKey</span><span class="s2">) {</span>
+                    <span class="s1">Calendar time </span><span class="s2">= </span><span class="s1">TimePickerFragment</span><span class="s2">.</span><span class="s1">getSelectedTime</span><span class="s2">(</span><span class="s1">result</span><span class="s2">);</span>
+                    <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setTime</span><span class="s2">(</span><span class="s1">time</span><span class="s2">);</span>
+                    <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                    <span class="s1">updateTime</span><span class="s2">();</span>
+                <span class="s2">}</span>
+
+                <span class="s4">/*if (requestKey == null){ 
+                    return; 
+                } 
+                if (REQUEST_TIME == requestKey){ 
+                    Calendar time = TimePickerFragment.getSelectedTime(result); 
+                    mCrime.setTime(time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE)); 
+                    mCrime.setChanged(true); 
+                    updateTime(); 
+                }*/</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">mSolvedCheckBox </span><span class="s2">= </span><span class="s1">v</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">ic_solver</span><span class="s2">);</span>
+        <span class="s1">mSolvedCheckBox</span><span class="s2">.</span><span class="s1">setChecked</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">isSolved</span><span class="s2">());</span>
+        <span class="s1">mSolvedCheckBox</span><span class="s2">.</span><span class="s1">setOnCheckedChangeListener</span><span class="s2">((</span><span class="s1">CompoundButton buttonView</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">isChecked</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setSolved</span><span class="s2">(</span><span class="s1">isChecked</span><span class="s2">);</span>
+            <span class="s1">mCrime</span><span class="s2">.</span><span class="s1">setChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+        <span class="s0">return </span><span class="s1">v</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">updateDate</span><span class="s2">() {</span><span class="s1">mDateButton</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getDateString</span><span class="s2">());}</span>
+
+    <span class="s0">private void </span><span class="s1">updateTime</span><span class="s2">() {</span><span class="s1">mTimeButton</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getTimeString</span><span class="s2">());}</span>
+
+    <span class="s0">public void </span><span class="s1">setupMenu</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">requireActivity</span><span class="s2">().</span><span class="s1">addMenuProvider</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MenuProvider</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCreateMenu</span><span class="s2">(</span><span class="s1">@NonNull Menu menu</span><span class="s2">, </span><span class="s1">@NonNull MenuInflater menuInflater</span><span class="s2">) {</span>
+                <span class="s1">menuInflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">menu</span><span class="s2">.</span><span class="s1">fragment_crime</span><span class="s2">, </span><span class="s1">menu</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s0">public boolean </span><span class="s1">onMenuItemSelected</span><span class="s2">(</span><span class="s1">@NonNull MenuItem item</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getItemId</span><span class="s2">() == </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">delete_crime</span><span class="s2">) {</span>
+
+                    <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">removeCrime</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">);</span>
+                    <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">setListChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">setListChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+                    <span class="s1">getActivity</span><span class="s2">().</span><span class="s1">finish</span><span class="s2">();</span>
+                    <span class="s0">return true</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getItemId</span><span class="s2">() == </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">new_crime</span><span class="s2">) {</span>
+                    <span class="s1">Crime crime </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Crime</span><span class="s2">();</span>
+                    <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">addCrime</span><span class="s2">(</span><span class="s1">crime</span><span class="s2">);</span>
+                    <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">setListChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                    <span class="s1">Intent intent </span><span class="s2">= </span><span class="s1">CrimePagerActivity</span><span class="s2">.</span><span class="s1">newIntent</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">(), </span><span class="s1">crime</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">());</span>
+                    <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);</span>
+                    <span class="s0">return true</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}, </span><span class="s1">getViewLifecycleOwner</span><span class="s2">(), </span><span class="s1">Lifecycle</span><span class="s2">.</span><span class="s1">State</span><span class="s2">.</span><span class="s1">RESUMED</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+
+</pre>
+</body>
+</html>

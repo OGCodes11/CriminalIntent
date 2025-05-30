@@ -1,0 +1,318 @@
+<html>
+<head>
+<title>CrimeListFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CrimeListFragment.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bignerdranch</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">criminalintent</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">Menu</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">MenuInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">MenuItem</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewGroup</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">MenuProvider</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">lifecycle</span><span class="s2">.</span><span class="s1">Lifecycle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">recyclerview</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">LinearLayoutManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">recyclerview</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">RecyclerView</span><span class="s2">;</span>
+
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">UUID</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">CrimeListFragment </span><span class="s0">extends </span><span class="s1">Fragment </span><span class="s2">{</span>
+    <span class="s0">private static final </span><span class="s1">String SAVED_SUBTITLE_VISIBLE </span><span class="s2">= </span><span class="s3">&quot;subtitle&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">RecyclerView mCrimeRecyclerView</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">CrimeAdapter mAdapter</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">mSubtitleVisible</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Button mAddCrime</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">TextView mNoCrimesView</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s4">//setHasOptionsMenu(true);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">View onCreateView</span><span class="s2">(</span><span class="s1">LayoutInflater inflater</span><span class="s2">, </span><span class="s1">ViewGroup container</span><span class="s2">, </span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s1">View view </span><span class="s2">= </span><span class="s1">inflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fragment_crime_list</span><span class="s2">, </span><span class="s1">container</span><span class="s2">, </span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">setupMenu</span><span class="s2">();</span>
+
+        <span class="s1">mCrimeRecyclerView </span><span class="s2">= (</span><span class="s1">RecyclerView</span><span class="s2">) </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_recycler_view</span><span class="s2">);</span>
+        <span class="s1">mCrimeRecyclerView</span><span class="s2">.</span><span class="s1">setLayoutManager</span><span class="s2">(</span><span class="s0">new </span><span class="s1">LinearLayoutManager</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()));</span>
+        <span class="s1">mNoCrimesView </span><span class="s2">= (</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">textView</span><span class="s2">);</span>
+        <span class="s1">mAddCrime </span><span class="s2">= (</span><span class="s1">Button</span><span class="s2">)</span><span class="s1">view</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">add_a_crime</span><span class="s2">);</span>
+        <span class="s1">mAddCrime</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">add_crime</span><span class="s2">);</span>
+        <span class="s1">mAddCrime</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">mAddCrime</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">View</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">View v</span><span class="s2">) {</span>
+                <span class="s1">Crime crime </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Crime</span><span class="s2">();</span>
+                <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">addCrime</span><span class="s2">(</span><span class="s1">crime</span><span class="s2">);</span>
+                <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">setListChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                <span class="s1">Intent intent </span><span class="s2">= </span><span class="s1">CrimePagerActivity</span><span class="s2">.</span><span class="s1">newIntent</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">(), </span><span class="s1">crime</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">());</span>
+                <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">getCrimes</span><span class="s2">().</span><span class="s1">size</span><span class="s2">() == </span><span class="s5">0</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">mNoCrimesView</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">VISIBLE</span><span class="s2">);</span>
+            <span class="s1">mAddCrime</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">VISIBLE</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else</span><span class="s2">{</span>
+            <span class="s1">mNoCrimesView</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">INVISIBLE</span><span class="s2">);</span>
+            <span class="s1">mAddCrime</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">INVISIBLE</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s4">/*if (savedInstanceState != null) { 
+            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE); 
+        }*/</span>
+
+        <span class="s1">updateUI</span><span class="s2">();</span>
+
+        <span class="s0">return </span><span class="s1">view</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onResume</span><span class="s2">(){</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onResume</span><span class="s2">();</span>
+
+        <span class="s1">updateUI</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s4">/*@Override 
+    public void onSaveInstanceState(Bundle outState) { 
+        super.onSaveInstanceState(outState); 
+        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible); 
+    }*/</span>
+
+    <span class="s0">public void </span><span class="s1">setupMenu</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">requireActivity</span><span class="s2">().</span><span class="s1">addMenuProvider</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MenuProvider</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onCreateMenu</span><span class="s2">(</span><span class="s1">@NonNull Menu menu</span><span class="s2">, </span><span class="s1">@NonNull MenuInflater menuInflater</span><span class="s2">) {</span>
+                <span class="s1">menuInflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">menu</span><span class="s2">.</span><span class="s1">fragment_crime_list</span><span class="s2">, </span><span class="s1">menu</span><span class="s2">);</span>
+
+                <span class="s4">/*MenuItem subtitleItem = menu.findItem(R.id.show_subtitle); 
+                if (mSubtitleVisible) { 
+                    subtitleItem.setTitle(R.string .hide_subtitle); 
+                } else { 
+                    subtitleItem.setTitle(R.string.show_subtitle); 
+                }*/</span>
+            <span class="s2">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">onMenuItemSelected</span><span class="s2">(</span><span class="s1">@NonNull MenuItem item</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getItemId</span><span class="s2">() == </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">new_crime</span><span class="s2">) {</span>
+                    <span class="s1">Crime crime </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Crime</span><span class="s2">();</span>
+                    <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">addCrime</span><span class="s2">(</span><span class="s1">crime</span><span class="s2">);</span>
+                    <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">setListChanged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+                    <span class="s1">Intent intent </span><span class="s2">= </span><span class="s1">CrimePagerActivity</span><span class="s2">.</span><span class="s1">newIntent</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">(), </span><span class="s1">crime</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">());</span>
+                    <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);</span>
+                    <span class="s0">return true</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getItemId</span><span class="s2">() == </span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">show_subtitle</span><span class="s2">) {</span>
+                    <span class="s1">mSubtitleVisible </span><span class="s2">= !</span><span class="s1">mSubtitleVisible</span><span class="s2">;</span>
+                    <span class="s1">getActivity</span><span class="s2">().</span><span class="s1">invalidateOptionsMenu</span><span class="s2">();</span>
+                    <span class="s1">updateSubtitle</span><span class="s2">();</span>
+                    <span class="s0">return true</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/*@Override 
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) { 
+        super.onCreateOptionsMenu(menu, inflater); 
+        inflater.inflate(R.menu.fragment_crime_list, menu); 
+ 
+        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle); 
+        if (mSubtitleVisible) { 
+            subtitleItem.setTitle(R.string.hide_subtitle); 
+        } else { 
+            subtitleItem.setTitle(R.string.show_subtitle); 
+        } 
+    }*/</span>
+
+    <span class="s4">/*@Override 
+    public boolean onOptionsItemSelected(MenuItem item) { 
+        switch (item.getItemId()) { 
+            case R.id.new_crime: 
+                Crime crime = new Crime(); 
+                CrimeLab.get(getActivity()).addCrime(crime); 
+                Intent intent = CrimePagerActivity 
+                        .newIntent(getActivity(), crime.getId()); 
+                startActivity(intent); 
+                return true; 
+            case R.id.show_subtitle: 
+                mSubtitleVisible = !mSubtitleVisible; 
+                getActivity().invalidateOptionsMenu(); 
+                updateSubtitle(); 
+                return true; 
+            default: 
+                return super.onOptionsItemSelected(item); 
+        } 
+    }*/</span>
+
+    <span class="s0">private void </span><span class="s1">updateSubtitle</span><span class="s2">() {</span>
+        <span class="s1">CrimeLab crimeLab </span><span class="s2">= </span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">());</span>
+        <span class="s0">int </span><span class="s1">crimeCount </span><span class="s2">= </span><span class="s1">crimeLab</span><span class="s2">.</span><span class="s1">getCrimes</span><span class="s2">().</span><span class="s1">size</span><span class="s2">();</span>
+        <span class="s1">String subtitle </span><span class="s2">= </span><span class="s1">getResources</span><span class="s2">().</span><span class="s1">getQuantityString</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">plurals</span><span class="s2">.</span><span class="s1">subtitle_plural</span><span class="s2">, </span><span class="s1">crimeCount</span><span class="s2">, </span><span class="s1">crimeCount</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">mSubtitleVisible</span><span class="s2">) {</span>
+            <span class="s1">subtitle </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">AppCompatActivity activity </span><span class="s2">= (</span><span class="s1">AppCompatActivity</span><span class="s2">) </span><span class="s1">getActivity</span><span class="s2">();</span>
+        <span class="s1">activity</span><span class="s2">.</span><span class="s1">getSupportActionBar</span><span class="s2">().</span><span class="s1">setSubtitle</span><span class="s2">(</span><span class="s1">subtitle</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">updateUI</span><span class="s2">() {</span>
+        <span class="s1">CrimeLab crimeLab </span><span class="s2">= </span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">());</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Crime</span><span class="s2">&gt; </span><span class="s1">crimes </span><span class="s2">= </span><span class="s1">crimeLab</span><span class="s2">.</span><span class="s1">getCrimes</span><span class="s2">();</span>
+        <span class="s4">//Log.d(&quot;CrimeList&quot;, &quot;The first item is &quot; + crimes.get(0).getTitle());</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">mAdapter </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">mAdapter </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CrimeAdapter</span><span class="s2">(</span><span class="s1">crimes</span><span class="s2">);</span>
+            <span class="s1">mCrimeRecyclerView</span><span class="s2">.</span><span class="s1">setAdapter</span><span class="s2">(</span><span class="s1">mAdapter</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if</span><span class="s2">(</span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">isListChanged</span><span class="s2">())</span>
+        <span class="s2">{</span>
+            <span class="s1">mAdapter</span><span class="s2">.</span><span class="s1">setCrimes</span><span class="s2">(</span><span class="s1">crimes</span><span class="s2">);</span>
+            <span class="s1">mAdapter</span><span class="s2">.</span><span class="s1">notifyDataSetChanged</span><span class="s2">();</span>
+            <span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">setListChanged</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">crimes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+                <span class="s1">Crime crime </span><span class="s2">= </span><span class="s1">crimes</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">crime</span><span class="s2">.</span><span class="s1">isChanged</span><span class="s2">()) {</span>
+                    <span class="s1">mAdapter</span><span class="s2">.</span><span class="s1">notifyItemChanged</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+                    <span class="s1">crime</span><span class="s2">.</span><span class="s1">setChanged</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s1">updateSubtitle</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private class </span><span class="s1">CrimeHolder </span><span class="s0">extends </span><span class="s1">RecyclerView</span><span class="s2">.</span><span class="s1">ViewHolder </span><span class="s0">implements </span><span class="s1">View</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">{</span>
+
+        <span class="s0">private </span><span class="s1">TextView mTitleTextView</span><span class="s2">;</span>
+        <span class="s0">private </span><span class="s1">TextView mDateTextView</span><span class="s2">;</span>
+        <span class="s0">private </span><span class="s1">TextView mTimeTextView</span><span class="s2">;</span>
+        <span class="s0">private </span><span class="s1">ImageView mSolvedImageView</span><span class="s2">;</span>
+        <span class="s0">private </span><span class="s1">Crime mCrime</span><span class="s2">;</span>
+        <span class="s0">private </span><span class="s1">Button mPoliceButton</span><span class="s2">;</span>
+
+
+        <span class="s0">public </span><span class="s1">CrimeHolder</span><span class="s2">(</span><span class="s1">LayoutInflater inflater</span><span class="s2">, </span><span class="s1">ViewGroup parent</span><span class="s2">) {</span>
+            <span class="s0">super</span><span class="s2">(</span><span class="s1">inflater</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">list_item_crime</span><span class="s2">, </span><span class="s1">parent</span><span class="s2">, </span><span class="s0">false</span><span class="s2">));</span>
+            <span class="s1">itemView</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+
+            <span class="s1">mTitleTextView </span><span class="s2">= (</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_title</span><span class="s2">);</span>
+            <span class="s1">mDateTextView </span><span class="s2">= (</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_date</span><span class="s2">);</span>
+            <span class="s1">mTimeTextView </span><span class="s2">= (</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_time</span><span class="s2">);</span>
+            <span class="s1">mSolvedImageView </span><span class="s2">= (</span><span class="s1">ImageView</span><span class="s2">) </span><span class="s1">itemView</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">ic_solver</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">public void </span><span class="s1">bind</span><span class="s2">(</span><span class="s1">Crime crime</span><span class="s2">) {</span>
+            <span class="s1">mCrime </span><span class="s2">= </span><span class="s1">crime</span><span class="s2">;</span>
+            <span class="s1">mTitleTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getTitle</span><span class="s2">());</span>
+            <span class="s1">mDateTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getDateString</span><span class="s2">());</span>
+            <span class="s1">mTimeTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getTimeString</span><span class="s2">());</span>
+            <span class="s1">mSolvedImageView</span><span class="s2">.</span><span class="s1">setVisibility</span><span class="s2">(</span><span class="s1">crime</span><span class="s2">.</span><span class="s1">isSolved</span><span class="s2">() ? </span><span class="s1">View</span><span class="s2">.</span><span class="s1">VISIBLE </span><span class="s2">: </span><span class="s1">View</span><span class="s2">.</span><span class="s1">GONE</span><span class="s2">);</span>
+            <span class="s4">/*if (mCrime.getRequiresPolice()){ 
+                mPoliceButton = (Button) itemView.findViewById(R.id.call_police); 
+                mPoliceButton.setOnClickListener(new View.OnClickListener()){ 
+                    @Override 
+                    public void onClick(View v ){ 
+                        Toast.makeText(getActivity(), &quot;Called the police!&quot;, Toast.) 
+                    } 
+                } 
+            }*/</span>
+        <span class="s2">}</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">View view</span><span class="s2">) {</span>
+                <span class="s0">int </span><span class="s1">position </span><span class="s2">= </span><span class="s1">getBindingAdapterPosition</span><span class="s2">();</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">position </span><span class="s2">!= </span><span class="s1">RecyclerView</span><span class="s2">.</span><span class="s1">NO_POSITION</span><span class="s2">){</span>
+                <span class="s1">Intent intent </span><span class="s2">= </span><span class="s1">CrimePagerActivity</span><span class="s2">.</span><span class="s1">newIntent</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">(), </span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">());</span>
+                <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">);}</span>
+            <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">private class </span><span class="s1">CrimeAdapter </span><span class="s0">extends </span><span class="s1">RecyclerView</span><span class="s2">.</span><span class="s1">Adapter</span><span class="s2">&lt;</span><span class="s1">CrimeHolder</span><span class="s2">&gt; {</span>
+        <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Crime</span><span class="s2">&gt; </span><span class="s1">mCrimes</span><span class="s2">;</span>
+
+        <span class="s0">public </span><span class="s1">CrimeAdapter</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Crime</span><span class="s2">&gt; </span><span class="s1">crimes</span><span class="s2">) {</span>
+
+            <span class="s1">mCrimes </span><span class="s2">= </span><span class="s1">crimes</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public </span><span class="s1">CrimeHolder onCreateViewHolder</span><span class="s2">(</span><span class="s1">ViewGroup parent</span><span class="s2">, </span><span class="s0">int </span><span class="s1">viewType</span><span class="s2">) {</span>
+            <span class="s1">LayoutInflater layoutInflater </span><span class="s2">= </span><span class="s1">LayoutInflater</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">());</span>
+
+            <span class="s0">return new </span><span class="s1">CrimeHolder</span><span class="s2">(</span><span class="s1">layoutInflater</span><span class="s2">, </span><span class="s1">parent</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">onBindViewHolder</span><span class="s2">(</span><span class="s1">CrimeHolder holder</span><span class="s2">, </span><span class="s0">int </span><span class="s1">position</span><span class="s2">) {</span>
+            <span class="s1">Crime crime </span><span class="s2">= </span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+            <span class="s1">holder</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">(</span><span class="s1">crime</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public int </span><span class="s1">getItemCount</span><span class="s2">() {</span>
+
+            <span class="s0">return </span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+        <span class="s0">public void </span><span class="s1">setCrimes</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Crime</span><span class="s2">&gt; </span><span class="s1">crimes</span><span class="s2">) {</span>
+            <span class="s1">mCrimes </span><span class="s2">= </span><span class="s1">crimes</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s4">/*@Override 
+        public int getItemViewType(int position){ 
+            Crime crime = mCrimes.get(position); 
+            if (crime.getRequiresPolice()) { 
+                return 1; 
+            } else{ 
+                    return 0; 
+            } 
+ 
+        }*/</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

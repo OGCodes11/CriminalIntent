@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>CrimePagerActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CrimePagerActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bignerdranch</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">criminalintent</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">OnBackPressedCallback</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Fragment</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">viewpager2</span><span class="s2">.</span><span class="s1">adapter</span><span class="s2">.</span><span class="s1">FragmentStateAdapter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">viewpager2</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ViewPager2</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">UUID</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">CrimePagerActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s2">{</span>
+    <span class="s0">private static final </span><span class="s1">String EXTRA_CRIME_ID </span><span class="s2">=</span>
+            <span class="s3">&quot;com.bignerdranch.android.criminalintent.crime_id&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">ViewPager2 mViewPager</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Crime</span><span class="s2">&gt; </span><span class="s1">mCrimes</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">FragmentStateAdapter mPagerAdapter</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">Button mFirstCrimeButton</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Button mLastCrimeButton</span><span class="s2">;</span>
+
+    <span class="s0">public static </span><span class="s1">Intent newIntent</span><span class="s2">(</span><span class="s1">Context packageContext</span><span class="s2">, </span><span class="s1">UUID crimeId</span><span class="s2">) {</span>
+        <span class="s1">Intent intent </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">packageContext</span><span class="s2">, </span><span class="s1">CrimePagerActivity</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+        <span class="s1">intent</span><span class="s2">.</span><span class="s1">putExtra</span><span class="s2">(</span><span class="s1">EXTRA_CRIME_ID</span><span class="s2">, </span><span class="s1">crimeId</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">intent</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_crime_pager</span><span class="s2">);</span>
+
+        <span class="s1">UUID crimeId </span><span class="s2">= (</span><span class="s1">UUID</span><span class="s2">) </span><span class="s1">getIntent</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">getSerializableExtra</span><span class="s2">(</span><span class="s1">EXTRA_CRIME_ID</span><span class="s2">);</span>
+
+        <span class="s1">mViewPager </span><span class="s2">= (</span><span class="s1">ViewPager2</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">crime_view_pager</span><span class="s2">);</span>
+        <span class="s1">mFirstCrimeButton </span><span class="s2">= (</span><span class="s1">Button</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">to_first_crime</span><span class="s2">);</span>
+        <span class="s1">mLastCrimeButton </span><span class="s2">= (</span><span class="s1">Button</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">to_last_crime</span><span class="s2">);</span>
+        <span class="s1">mCrimes </span><span class="s2">= </span><span class="s1">CrimeLab</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s0">this</span><span class="s2">).</span><span class="s1">getCrimes</span><span class="s2">();</span>
+        <span class="s1">mPagerAdapter </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CrimePagerAdapter</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+        <span class="s1">mViewPager</span><span class="s2">.</span><span class="s1">setAdapter</span><span class="s2">(</span><span class="s1">mPagerAdapter</span><span class="s2">);</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">).</span><span class="s1">getId</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">crimeId</span><span class="s2">)) {</span>
+                <span class="s1">mViewPager</span><span class="s2">.</span><span class="s1">setCurrentItem</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">mFirstCrimeButton</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">v -&gt; mViewPager</span><span class="s2">.</span><span class="s1">setCurrentItem</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s0">true</span><span class="s2">));</span>
+        <span class="s1">mLastCrimeButton</span><span class="s2">.</span><span class="s1">setOnClickListener</span><span class="s2">(</span><span class="s1">v -&gt; mViewPager</span><span class="s2">.</span><span class="s1">setCurrentItem</span><span class="s2">(</span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() - </span><span class="s4">1</span><span class="s2">, </span><span class="s0">true</span><span class="s2">));</span>
+
+        <span class="s1">mViewPager</span><span class="s2">.</span><span class="s1">registerOnPageChangeCallback</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ViewPager2</span><span class="s2">.</span><span class="s1">OnPageChangeCallback</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onPageSelected</span><span class="s2">(</span><span class="s0">int </span><span class="s1">position</span><span class="s2">) {</span>
+                <span class="s0">super</span><span class="s2">.</span><span class="s1">onPageSelected</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+                <span class="s1">updateButton</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">OnBackPressedCallback callBack </span><span class="s2">= </span><span class="s0">new </span><span class="s1">OnBackPressedCallback</span><span class="s2">(</span><span class="s0">true</span><span class="s2">) {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">handleOnBackPressed</span><span class="s2">() {</span>
+                <span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+                <span class="s1">getOnBackPressedDispatcher</span><span class="s2">().</span><span class="s1">onBackPressed</span><span class="s2">();</span>
+                <span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">};</span>
+        <span class="s1">getOnBackPressedDispatcher</span><span class="s2">().</span><span class="s1">addCallback</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">callBack</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">updateButton</span><span class="s2">(</span><span class="s0">int </span><span class="s1">position</span><span class="s2">) {</span>
+        <span class="s1">mFirstCrimeButton</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s1">position </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s1">mLastCrimeButton</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s1">position </span><span class="s2">!= </span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() - </span><span class="s4">1</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private class </span><span class="s1">CrimePagerAdapter </span><span class="s0">extends </span><span class="s1">FragmentStateAdapter</span><span class="s2">{</span>
+
+        <span class="s0">public </span><span class="s1">CrimePagerAdapter</span><span class="s2">(</span><span class="s1">FragmentActivity fa</span><span class="s2">){</span>
+            <span class="s0">super</span><span class="s2">(</span><span class="s1">fa</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public </span><span class="s1">Fragment createFragment</span><span class="s2">(</span><span class="s0">int </span><span class="s1">position</span><span class="s2">){</span>
+
+            <span class="s1">Crime mCrime </span><span class="s2">= </span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">position</span><span class="s2">);</span>
+            <span class="s0">return </span><span class="s1">CrimeFragment</span><span class="s2">.</span><span class="s1">newInstance</span><span class="s2">(</span><span class="s1">mCrime</span><span class="s2">.</span><span class="s1">getId</span><span class="s2">());</span>
+        <span class="s2">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public int </span><span class="s1">getItemCount</span><span class="s2">(){</span>
+            <span class="s0">return </span><span class="s1">mCrimes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

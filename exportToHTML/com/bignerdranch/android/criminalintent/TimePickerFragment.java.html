@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>TimePickerFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+TimePickerFragment.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">bignerdranch</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">criminalintent</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Dialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">DialogInterface</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TimePicker</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AlertDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">DialogFragment</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Calendar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">GregorianCalendar</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">TimePickerFragment </span><span class="s0">extends </span><span class="s1">DialogFragment </span><span class="s2">{</span>
+
+    <span class="s0">public static final </span><span class="s1">String EXTRA_TIME </span><span class="s2">= </span><span class="s3">&quot;com.bignerdranch.android.criminalintent.time&quot;</span><span class="s2">;</span>
+    <span class="s0">public static final </span><span class="s1">String TAG </span><span class="s2">= </span><span class="s3">&quot;TimePickerFragment&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private static final </span><span class="s1">String ARG_TIME </span><span class="s2">= </span><span class="s3">&quot;time&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String ARG_REQUEST_CODE </span><span class="s2">= </span><span class="s3">&quot;request_code_time&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String RESULT_TIME_KEY </span><span class="s2">= </span><span class="s3">&quot;result_time&quot;</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">TimePicker mTimePicker</span><span class="s2">;</span>
+
+    <span class="s0">public static </span><span class="s1">TimePickerFragment newInstance</span><span class="s2">(</span><span class="s1">Calendar time</span><span class="s2">, </span><span class="s1">String requestCode</span><span class="s2">) {</span>
+        <span class="s1">Bundle args </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Bundle</span><span class="s2">();</span>
+        <span class="s1">args</span><span class="s2">.</span><span class="s1">putSerializable</span><span class="s2">(</span><span class="s1">ARG_TIME</span><span class="s2">, </span><span class="s1">time</span><span class="s2">);</span>
+        <span class="s1">args</span><span class="s2">.</span><span class="s1">putSerializable</span><span class="s2">(</span><span class="s1">ARG_REQUEST_CODE</span><span class="s2">, </span><span class="s1">requestCode</span><span class="s2">);</span>
+
+        <span class="s1">TimePickerFragment fragment </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TimePickerFragment</span><span class="s2">();</span>
+        <span class="s1">fragment</span><span class="s2">.</span><span class="s1">setArguments</span><span class="s2">(</span><span class="s1">args</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">fragment</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">Dialog onCreateDialog</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s1">Calendar t </span><span class="s2">= (</span><span class="s1">Calendar</span><span class="s2">) </span><span class="s1">getArguments</span><span class="s2">().</span><span class="s1">getSerializable</span><span class="s2">(</span><span class="s1">ARG_TIME</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">hour </span><span class="s2">= </span><span class="s1">t</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">HOUR_OF_DAY</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">minute </span><span class="s2">= </span><span class="s1">t</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MINUTE</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">second </span><span class="s2">= </span><span class="s1">t</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">SECOND</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">millisecond </span><span class="s2">= </span><span class="s1">t</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MILLISECOND</span><span class="s2">);</span>
+
+        <span class="s1">View v </span><span class="s2">= </span><span class="s1">LayoutInflater</span><span class="s2">.</span><span class="s1">from</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">()).</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">dialog_time</span><span class="s2">, </span><span class="s0">null</span><span class="s2">);</span>
+
+        <span class="s1">mTimePicker </span><span class="s2">= (</span><span class="s1">TimePicker</span><span class="s2">) </span><span class="s1">v</span><span class="s2">.</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">dialog_time_picker</span><span class="s2">);</span>
+        <span class="s1">mTimePicker</span><span class="s2">.</span><span class="s1">setHour</span><span class="s2">(</span><span class="s1">hour</span><span class="s2">);</span>
+        <span class="s1">mTimePicker</span><span class="s2">.</span><span class="s1">setMinute</span><span class="s2">(</span><span class="s1">minute</span><span class="s2">);</span>
+        <span class="s4">//mTimePicker.setSecond(second);</span>
+        <span class="s4">//mTimePicker.setMillisecond(millisecond);</span>
+
+        <span class="s0">return new </span><span class="s1">AlertDialog</span><span class="s2">.</span><span class="s1">Builder</span><span class="s2">(</span><span class="s1">getActivity</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">setView</span><span class="s2">(</span><span class="s1">v</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">time_picker_title</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">setPositiveButton</span><span class="s2">(</span><span class="s1">android</span><span class="s2">.</span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">ok</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DialogInterface</span><span class="s2">.</span><span class="s1">OnClickListener</span><span class="s2">() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick</span><span class="s2">(</span><span class="s1">DialogInterface dialog</span><span class="s2">, </span><span class="s0">int </span><span class="s1">which</span><span class="s2">) {</span>
+                        <span class="s0">int </span><span class="s1">hours </span><span class="s2">= </span><span class="s1">mTimePicker</span><span class="s2">.</span><span class="s1">getHour</span><span class="s2">();</span>
+                        <span class="s0">int </span><span class="s1">minutes </span><span class="s2">= </span><span class="s1">mTimePicker</span><span class="s2">.</span><span class="s1">getMinute</span><span class="s2">();</span>
+                        <span class="s4">//int second = mTimePicker.getSecond();</span>
+                        <span class="s4">//int millisecond = mTimePicker.getMillisecond();</span>
+
+                        <span class="s1">t</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">HOUR_OF_DAY</span><span class="s2">, </span><span class="s1">hours</span><span class="s2">);</span>
+                        <span class="s1">t</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MINUTE</span><span class="s2">, </span><span class="s1">minutes</span><span class="s2">);</span>
+                        <span class="s1">t</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">SECOND</span><span class="s2">,</span><span class="s1">second</span><span class="s2">);</span>
+                        <span class="s1">t</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">MILLISECOND</span><span class="s2">, </span><span class="s1">millisecond</span><span class="s2">);</span>
+
+                        <span class="s1">Bundle result </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Bundle</span><span class="s2">();</span>
+                        <span class="s1">result</span><span class="s2">.</span><span class="s1">putSerializable</span><span class="s2">(</span><span class="s1">RESULT_TIME_KEY</span><span class="s2">, </span><span class="s1">t</span><span class="s2">);</span>
+                        <span class="s1">String resultRequestCode </span><span class="s2">= </span><span class="s1">requireArguments</span><span class="s2">().</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">ARG_REQUEST_CODE</span><span class="s2">, </span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+                        <span class="s1">requireActivity</span><span class="s2">().</span><span class="s1">getSupportFragmentManager</span><span class="s2">().</span><span class="s1">setFragmentResult</span><span class="s2">(</span><span class="s1">resultRequestCode</span><span class="s2">, </span><span class="s1">result</span><span class="s2">);</span>
+
+                    <span class="s2">}</span>
+                <span class="s2">}).</span><span class="s1">create</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">Calendar getSelectedTime</span><span class="s2">(</span><span class="s1">Bundle result</span><span class="s2">){</span>
+        <span class="s1">Calendar resultTime </span><span class="s2">= (</span><span class="s1">Calendar</span><span class="s2">) </span><span class="s1">result</span><span class="s2">.</span><span class="s1">getSerializable</span><span class="s2">(</span><span class="s1">RESULT_TIME_KEY</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">resultTime</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
